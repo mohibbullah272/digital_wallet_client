@@ -4,7 +4,7 @@ import Logo from "@/components/ui/Logo";
 const Footer = () => {
     return (
 
-            <footer className="bg-accent-foreground">
+            <footer className="bg-gradient-to-br from-primary/5 via-primary/5 to-background">
   <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
     <div className="flex justify-center text-teal-600">
    <Logo></Logo>

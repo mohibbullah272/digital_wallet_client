@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Logo from "./ui/Logo";
 
 interface Login2Props {
   heading?: string;
-  logo: {
+  logo?: {
     url: string;
     src: string;
     alt: string;
@@ -16,7 +17,7 @@ interface Login2Props {
   signupUrl?: string;
 }
 
-const Login2 = ({
+const Login = ({
   heading = "Login",
   logo = {
     url: "https://www.shadcnblocks.com",
@@ -33,14 +34,9 @@ const Login2 = ({
       <div className="flex h-full items-center justify-center">
         <div className="flex flex-col items-center gap-6 lg:justify-start">
           {/* Logo */}
-          <a href={logo.url}>
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              title={logo.title}
-              className="h-10 dark:invert"
-            />
-          </a>
+          <p className="flex items-center gap-2" >
+        <Logo></Logo><span className="text-xl font-medium">E-Wallet.com</span>
+          </p>
           <div className="min-w-sm border-muted bg-background flex w-full max-w-sm flex-col items-center gap-y-4 rounded-md border px-6 py-8 shadow-md">
             {heading && <h1 className="text-xl font-semibold">{heading}</h1>}
             <div className="flex w-full flex-col gap-2">
@@ -80,4 +76,4 @@ const Login2 = ({
   );
 };
 
-export { Login2 };
+export { Login  };

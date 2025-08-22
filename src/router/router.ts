@@ -6,6 +6,7 @@ import Feature from "@/page/Feature";
 import FAQ from "@/page/FAQ";
 import Contact from "@/page/Contact";
 import About from "@/page/About";
+import { Login } from "@/components/login";
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
                 Component:Contact
             }
         ])
+       
+    },
+    {
+        path:'/login',
+        Component:Login
     }
 ])
 
