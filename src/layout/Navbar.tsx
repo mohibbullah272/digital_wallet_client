@@ -81,10 +81,10 @@ const Navbar = ({
   },
 }: Navbar1Props) => {
   return (
-    <section className="py-4 px-5 flex flex-col justify-between items-center ">
+    <section className="py-4 fixed top-0 left-0 w-full z-50 bg-background shadow-md  px-5 flex flex-col justify-between items-center ">
       <div className="container">
         {/* Desktop Menu */}
-        <nav className="hidden justify-between lg:flex">
+        <nav className=" hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
             <a href='/' className="flex items-center gap-2">
