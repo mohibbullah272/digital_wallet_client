@@ -87,7 +87,7 @@ const UserOverview: React.FC<UserOverviewProps> = ({
     }
   };
 
-  const formatAmount = (amount: number, currency: string = 'BDT') => {
+  const formatAmount = (amount: number,) => {
     const absAmount = Math.abs(amount);
     const sign = amount < 0 ? '-' : '+';
     return `${amount < 0 ? sign : ''}$${absAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;

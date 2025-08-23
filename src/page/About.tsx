@@ -12,8 +12,7 @@ import {
 
   CheckCircle
 } from 'lucide-react';
-import { generateRoutes } from '@/utils/generateRoutes';
-import { userSidebarItems } from '@/router/UserSidebar';
+
 
 // Type definitions
 interface ServiceCardProps {
