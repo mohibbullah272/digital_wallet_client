@@ -20,7 +20,7 @@ const Hero = ({
 
   description = "With E-Wallet, you can deposit, withdraw, and transfer money anytime, anywhere. Experience seamless digital transactions built for speed, security, and convenience",
   button = {
-    text: "Create Account",
+    text: "Explore Now",
     icon: <Zap className="ml-2 size-4" />,
 
   },
@@ -51,7 +51,7 @@ const Hero = ({
             </p>
             <div className="flex flex-col items-center justify-center gap-3 pt-3 pb-12">
               <Button size="lg" asChild>
-                <Link to={'/signup'}>
+                <Link to={'/feature'}>
                   {button.text} {button.icon}
                 </Link>
               </Button>

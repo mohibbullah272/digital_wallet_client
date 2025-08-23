@@ -1,4 +1,4 @@
-import {  Menu } from "lucide-react";
+import {  LogOut, Menu } from "lucide-react";
 
 import {
   Accordion,
@@ -24,6 +24,8 @@ import {
 } from "@/components/ui/sheet";
 import Logo from "@/components/ui/Logo";
 import { Link, NavLink } from "react-router";
+import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/authApi/AuthApi";
+import { useAppDispatch } from "@/hook/hook";
 
 
 interface MenuItem {
@@ -80,6 +82,15 @@ const Navbar = ({
     signup: { title: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
+
+  const {data}=useUserInfoQuery(undefined)
+
+ const dispatch =useAppDispatch()
+  const [logout]=useLogoutMutation()
+  const handleLogout =()=>{
+logout(undefined)
+dispatch(authApi.util.resetApiState())
+  }
   return (
     <section className="py-4 fixed top-0 left-0 w-full z-50 bg-background shadow-md  px-5 flex flex-col justify-between items-center ">
       <div className="container">
@@ -102,12 +113,17 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <Link to={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link to={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+          {
+            !data?.data?<>
+            <Button asChild variant="outline">
+            <Link to={auth.login.url}>{auth.login.title}</Link>
+          </Button>
+          <Button asChild>
+            <Link to={auth.signup.url}>{auth.signup.title}</Link>
+          </Button>
+            </>   :<Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button>
+          }
+          
           </div>
         </nav>
 
@@ -142,12 +158,17 @@ const Navbar = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <Link to={auth.login.url}>{auth.login.title}</Link>
-                    </Button>
-                    <Button asChild>
-                      <Link to={auth.signup.url}>{auth.signup.title}</Link>
-                    </Button>
+                  {
+            !data?.data?<>
+            <Button asChild variant="outline">
+            <Link to={auth.login.url}>{auth.login.title}</Link>
+          </Button>
+          <Button asChild>
+            <Link to={auth.signup.url}>{auth.signup.title}</Link>
+          </Button>
+            </>   :<Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button>
+          }
+          
                   </div>
                 </div>
               </SheetContent>

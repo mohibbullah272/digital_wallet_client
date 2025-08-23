@@ -12,6 +12,8 @@ import {
 
   CheckCircle
 } from 'lucide-react';
+import { generateRoutes } from '@/utils/generateRoutes';
+import { userSidebarItems } from '@/router/UserSidebar';
 
 // Type definitions
 interface ServiceCardProps {
@@ -73,6 +75,8 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ icon, label, value, href }) =
 
 // Main About Page Component
 const About: React.FC<AboutPageProps> = ({ className = "" }) => {
+
+
   const services: ServiceCardProps[] = [
     {
       icon: <Shield size={32} />,
@@ -125,7 +129,7 @@ const About: React.FC<AboutPageProps> = ({ className = "" }) => {
       {/* Hero Banner Section */}
       <section className="relative bg-gradient-to-br from-primary/20 via-primary/10 to-background py-24 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"></div>
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-6xl mt-20 mx-auto text-center">
       
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
             The Future of

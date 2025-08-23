@@ -134,7 +134,7 @@ const Contact: React.FC<ContactPageProps> = ({ className = "" }) => {
     <div className={`min-h-screen bg-background ${className}`}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/20 via-primary/10 to-background py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mt-20 mx-auto text-center">
          
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Contact <span className="text-primary">E-Wallet</span>

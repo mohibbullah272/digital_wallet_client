@@ -2,12 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import Logo from "./ui/Logo";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { useLoginMutation } from "@/redux/features/authApi/AuthApi";
+import { toast } from "sonner";
 
 
  
@@ -25,12 +26,16 @@ const Login = () => {
     password:''
     },
   })
+  const navigate = useNavigate()
  async function onSubmit(values: z.infer<typeof formSchema>) {
 try {
   const res = await login(values).unwrap()
+  toast.success('login successfully')
+  navigate('/')
   console.log(res)
-} catch (error) {
+} catch (error:any) {
   console.log(error)
+  toast.error(error?.data?.message)
 }
   }
 

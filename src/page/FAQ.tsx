@@ -305,7 +305,7 @@ const FAQ: React.FC<FAQPageProps> = ({ className = "" }) => {
     <div className={`min-h-screen bg-background ${className}`}>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary/20 via-primary/10 to-background py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto mt-20 text-center">
      
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             How Can We <span className="text-primary">Help You?</span>

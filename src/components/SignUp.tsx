@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import Logo from "./ui/Logo";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { useRegisterMutation } from "@/redux/features/authApi/AuthApi";
+import { toast } from "sonner";
 
 
  
@@ -30,12 +31,16 @@ const Signup = () => {
     password:''
     },
   })
+  const navigate = useNavigate()
 async  function onSubmit(values: z.infer<typeof formSchema>) {
 try {
   const res = await register(values).unwrap()
+  toast.success('sign up successfully')
+  navigate('/')
   console.log(res)
-} catch (error) {
+} catch (error:any) {
     console.log(error)
+    toast.error(error?.data?.message)
 }
   }
 
