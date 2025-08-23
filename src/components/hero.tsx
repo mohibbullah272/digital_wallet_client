@@ -1,16 +1,15 @@
 import {  Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 
 interface Hero115Props {
-
-  heading?: string;
   description?: string;
   button?: {
     text: string;
     icon?: React.ReactNode;
-    url: string;
+  
   };
 
 
@@ -18,12 +17,12 @@ interface Hero115Props {
 
 const Hero = ({
  
-  heading = "The Smarter Way to Manage Your Money",
+
   description = "With E-Wallet, you can deposit, withdraw, and transfer money anytime, anywhere. Experience seamless digital transactions built for speed, security, and convenience",
   button = {
     text: "Create Account",
     icon: <Zap className="ml-2 size-4" />,
-    url: "https://www.shadcnblocks.com",
+
   },
 
  
@@ -45,16 +44,16 @@ const Hero = ({
             </div>
   
             <h2 className="mx-auto max-w-5xl mt-32 text-center text-3xl font-medium text-balance md:text-6xl">
-              {heading}
+            The Smarter Way to <span className="text-primary block"> Manage Your Money</span>
             </h2>
             <p className="mx-auto max-w-3xl text-center text-muted-foreground md:text-lg">
               {description}
             </p>
             <div className="flex flex-col items-center justify-center gap-3 pt-3 pb-12">
               <Button size="lg" asChild>
-                <a href={button.url}>
+                <Link to={'/signup'}>
                   {button.text} {button.icon}
-                </a>
+                </Link>
               </Button>
              
             </div>

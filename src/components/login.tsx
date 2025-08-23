@@ -1,34 +1,40 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import Logo from "./ui/Logo";
+import { Link } from "react-router";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { useLoginMutation } from "@/redux/features/authApi/AuthApi";
 
-interface Login2Props {
-  heading?: string;
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title?: string;
-  };
-  buttonText?: string;
-  googleText?: string;
-  signupText?: string;
-  signupUrl?: string;
+
+ 
+const formSchema = z.object({
+  email: z.email({message:'please provide a valid email'}),
+  password:z.string().min(8,{message:'password should be in 8 character'})
+})
+
+const Login = () => {
+  const [login]=useLoginMutation()
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+    email: "",
+    password:''
+    },
+  })
+ async function onSubmit(values: z.infer<typeof formSchema>) {
+try {
+  const res = await login(values).unwrap()
+  console.log(res)
+} catch (error) {
+  console.log(error)
 }
+  }
 
-const Login = ({
-  heading = "Login",
-  logo = {
-    url: "https://www.shadcnblocks.com",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-wordmark.svg",
-    alt: "logo",
-    title: "shadcnblocks.com",
-  },
-  buttonText = "Login",
-  signupText = "Need an account?",
-  signupUrl = "https://shadcnblocks.com",
-}: Login2Props) => {
+
   return (
     <section className="bg-muted h-screen">
       <div className="flex h-full items-center justify-center">
@@ -38,37 +44,57 @@ const Login = ({
         <Logo></Logo><span className="text-xl font-medium">E-Wallet.com</span>
           </p>
           <div className="min-w-sm border-muted bg-background flex w-full max-w-sm flex-col items-center gap-y-4 rounded-md border px-6 py-8 shadow-md">
-            {heading && <h1 className="text-xl font-semibold">{heading}</h1>}
-            <div className="flex w-full flex-col gap-2">
-              <Label>Email</Label>
-              <Input
-                type="email"
-                placeholder="Email"
-                className="text-sm"
-                required
-              />
-            </div>
-            <div className="flex w-full flex-col gap-2">
-              <Label>Password</Label>
-              <Input
-                type="password"
-                placeholder="Password"
-                className="text-sm"
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              {buttonText}
-            </Button>
+         <h1 className="text-xl font-semibold">Login Now</h1>
+         <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <FormField
+        
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>email</FormLabel>
+              <FormControl>
+                <Input  placeholder="john@gmail.com" {...field} />
+              </FormControl>
+              <FormDescription className="sr-only">
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>password</FormLabel>
+              <FormControl>
+                <Input placeholder="**********" {...field} />
+              </FormControl>
+              <FormDescription className="sr-only">
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="w-full" type="submit">Login</Button>
+      </form>
+    </Form>
+            
           </div>
           <div className="text-muted-foreground flex justify-center gap-1 text-sm">
-            <p>{signupText}</p>
-            <a
-              href={signupUrl}
+            <p>don't have a account ? </p>
+            <Link
+            
+            to={'/signup'}
+              
               className="text-primary font-medium hover:underline"
             >
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
       </div>
