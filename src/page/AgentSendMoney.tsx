@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Send, DollarSign, FileText,  Search, X } from 'lucide-react';
-import {   useWalletInfoQuery } from '@/redux/features/userApi/userApi';
+
 import { toast } from 'sonner';
 import { useAgentCashInMutation } from '@/redux/features/agentAPi/agentApi';
 
@@ -25,10 +25,10 @@ const AgentSendMoney:any = () => {
   });
   const [searchResults, setSearchResults] = useState('');
  
-  const {data:wallet}=useWalletInfoQuery(undefined)
+ 
   const [agentCashIn]=useAgentCashInMutation()
 
-  let availableBalance=wallet?.data?.balance
+  
 console.log(form)
 
   const handleInputChange = (field: keyof SendForm, value: string) => {
@@ -62,17 +62,13 @@ console.log(form)
     }
   };
 
-  const isValidAmount = form.amount && parseFloat(form.amount) > 0;
-  const isAmountExceedsBalance = form.amount && parseFloat(form.amount) > availableBalance;
-  const canSend = isValidAmount && !isAmountExceedsBalance 
+ 
 
 
 
 
 
-  const formatAmount = (amount: number) => {
-    return `$${amount?.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  };
+
 
   return (
     <div className="space-y-6 ">
@@ -133,24 +129,15 @@ console.log(form)
                 id="amount"
                 type="number"
                 placeholder="0.00"
-                min="0.01"
-                max={availableBalance}
-                step="0.01"
+              
+              
                 defaultValue={form.amount}
                 onChange={(e) => handleInputChange('amount', e.target.value)}
                 className="pl-10 bg-background border-border text-foreground placeholder:text-muted-foreground"
               />
             </div>
-            {form.amount && parseFloat(form.amount) <= 0 && (
-              <p className="text-sm text-red-500">Please enter a valid amount greater than $0.00</p>
-            )}
-            {isAmountExceedsBalance && (
-              <p className="text-sm text-red-500">Amount exceeds available balance of {formatAmount(availableBalance)}</p>
-            )}
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Minimum: $0.01</span>
-              <span>Maximum: {formatAmount(availableBalance)}</span>
-            </div>
+           
+         
           </div>
 
           {/* Description Input */}
@@ -174,14 +161,14 @@ console.log(form)
           {/* Send Button */}
           <Button
             onClick={handleSend}
-            disabled={!canSend }
+    
             className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium"
           >
             
            
               <div className="flex items-center gap-2">
                 <Send className="h-4 w-4" />
-                Add {isValidAmount && !isAmountExceedsBalance ? formatAmount(parseFloat(form.amount)) : 'Money'}
+                Add Money
               </div>
           
           </Button>

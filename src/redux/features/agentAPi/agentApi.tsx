@@ -3,31 +3,13 @@ import { baseApi } from "../baseApi";
 
 export const agentApi = baseApi.injectEndpoints({
     endpoints:(builder)=>({
-    
-   
-        userDepositMoney: builder.mutation({
-            query: (amount) => ({
-              url: "/wallets/deposit",
-              method: "POST",
-              data: amount,
-            }),
-            invalidatesTags:["BALANCE","HISTORY"]
-          }),
-        userWithdrawMoney: builder.mutation({
-            query: (amount) => ({
-              url: "/wallets/withdraw",
-              method: "POST",
-              data: amount,
-            }),
-            invalidatesTags:["BALANCE","HISTORY"]
-          }),
       agentCashIn: builder.mutation({
             query: (amount) => ({
               url: "/agents/cash-in",
               method: "POST",
               data: amount,
             }),
-            invalidatesTags:["BALANCE","HISTORY"]
+            invalidatesTags:["BALANCE","HISTORY","Commission"]
           }),
       agentCashOut: builder.mutation({
             query: (amount) => ({
@@ -35,15 +17,15 @@ export const agentApi = baseApi.injectEndpoints({
               method: "POST",
               data: amount,
             }),
-            invalidatesTags:["BALANCE","HISTORY"]
+            invalidatesTags:["BALANCE","HISTORY","Commission"]
           }),
 
-        walletInfo: builder.query({
+        agentCommission: builder.query({
           query: () => ({
-            url: "/wallets/me",
+            url: "/agents/commissions",
             method: "GET",
           }),
-      providesTags:["BALANCE"]
+      providesTags:["Commission"]
         }),
         agentInfo: builder.query({
           query: () => ({
@@ -66,4 +48,4 @@ export const agentApi = baseApi.injectEndpoints({
     })
 })
 
-export   const {useAgentInfoQuery,useAgentCashInMutation,useAgentCashOutMutation}= agentApi
+export   const {useAgentCommissionQuery,useAgentInfoQuery,useAgentCashInMutation,useAgentCashOutMutation}= agentApi

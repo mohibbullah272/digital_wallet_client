@@ -1,10 +1,10 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, ArrowDownLeft, Send, Wallet, Clock, Shield, Calendar } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, Wallet, Clock, Shield, Calendar } from 'lucide-react';
 import { useUserTransactionInfoQuery, useWalletInfoQuery } from '@/redux/features/userApi/userApi';
 import { Link } from 'react-router';
-import { useAgentInfoQuery } from '@/redux/features/agentAPi/agentApi';
+import { useAgentCommissionQuery, useAgentInfoQuery } from '@/redux/features/agentAPi/agentApi';
 
 export interface Transaction {
   _id: string;
@@ -31,22 +31,24 @@ export interface Transaction {
 
 const agentOverview = () => {
   const {data:agentData}=useAgentInfoQuery(undefined)
-  const {data}=useWalletInfoQuery(undefined)
+
+  const {data}=useAgentCommissionQuery(undefined)
+ 
   const {data:history}=useUserTransactionInfoQuery({
     page: 1,
     limit: 5,
   })
   let recentTransactions: Transaction[] = history?.data?.transactions
 console.log(recentTransactions)
-  let  walletBalance = data?.data
+  let  walletBalance = data?.data?.totalCommission
+  console.log(walletBalance)
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
       case 'cash-in':
         return <ArrowDownLeft className="h-4 w-4 text-green-500" />;
-      case 'withdraw':
+      case 'cash-out':
         return <ArrowUpRight className="h-4 w-4 text-red-500" />;
-      case 'transfer':
-        return <Send className="h-4 w-4 text-blue-500" />;
+    
       default:
         return <Clock className="h-4 w-4" />;
     }
@@ -96,15 +98,15 @@ console.log(recentTransactions)
           <div>
             <CardTitle className="text-foreground flex items-center gap-2">
               <Wallet className="h-5 w-5" />
-              Wallet Balance
+             Commission
             </CardTitle>
-            <CardDescription>Your total available balance</CardDescription>
+            <CardDescription>Your total available Commission</CardDescription>
           </div>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
             <div className="text-3xl font-bold text-foreground">
-           {walletBalance?.balance}
+           {walletBalance}
             </div>
      
           </div>
@@ -174,7 +176,7 @@ console.log(recentTransactions)
             ))}
           </div>
           <div className="mt-6 text-center">
-       <Link to={'/user/transaction'}>
+       <Link to={'/agent/history'}>
        <Button variant="ghost" className="text-primary hover:text-primary/80">
               View All Transactions
             </Button>

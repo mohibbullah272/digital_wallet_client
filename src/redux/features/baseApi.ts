@@ -7,7 +7,7 @@ export const baseApi = createApi({
   endpoints: () => ({}),
   
 
-  tagTypes:["USER","BALANCE","HISTORY"]
+  tagTypes:["USER","BALANCE","HISTORY","Commission"]
   })
 
 
