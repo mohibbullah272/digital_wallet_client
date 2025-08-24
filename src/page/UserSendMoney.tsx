@@ -182,7 +182,7 @@ const UserSendMoney: React.FC<UserSendProps> = ({
   };
 
   return (
-    <div className="space-y-6 p-6 max-w-2xl mx-auto">
+    <div className="space-y-6 ">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">

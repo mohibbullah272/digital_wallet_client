@@ -26,7 +26,7 @@ interface UserWithdrawProps {
   availableBalance?: number;
 }
 
-const UserWithdraw: React.FC<UserWithdrawProps> = ({
+const AgentCashOut: React.FC<UserWithdrawProps> = ({
   onWithdraw,
   isLoading = false,
   availableBalance = 12847.32 // Placeholder balance
@@ -314,4 +314,4 @@ const UserWithdraw: React.FC<UserWithdrawProps> = ({
   );
 };
 
-export default UserWithdraw;
+export default AgentCashOut;

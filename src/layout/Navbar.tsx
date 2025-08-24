@@ -26,6 +26,7 @@ import Logo from "@/components/ui/Logo";
 import { Link, NavLink } from "react-router";
 import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/authApi/AuthApi";
 import { useAppDispatch } from "@/hook/hook";
+import { ModeToggle } from "@/components/mode-toggle";
 
 
 interface MenuItem {
@@ -113,6 +114,7 @@ dispatch(authApi.util.resetApiState())
             </div>
           </div>
           <div className="flex gap-2">
+        
           {
             !data?.data?<>
             <Button asChild variant="outline">
@@ -121,9 +123,11 @@ dispatch(authApi.util.resetApiState())
           <Button asChild>
             <Link to={auth.signup.url}>{auth.signup.title}</Link>
           </Button>
-            </>   :<Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button>
+            </>   :<div className="flex items-center gap-3">
+              <Link className="hover:underline" to={`/${data?.data?.role}`}>Dashboard</Link>
+              <Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button></div>
           }
-          
+              <ModeToggle></ModeToggle>
           </div>
         </nav>
 
@@ -158,6 +162,7 @@ dispatch(authApi.util.resetApiState())
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
+         
                   {
             !data?.data?<>
             <Button asChild variant="outline">
@@ -166,8 +171,11 @@ dispatch(authApi.util.resetApiState())
           <Button asChild>
             <Link to={auth.signup.url}>{auth.signup.title}</Link>
           </Button>
-            </>   :<Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button>
+            </>   :<div className="flex flex-col gap-3">
+              <Link className="hover:underline" to={`/${data?.data?.role}`}>Dashboard</Link>
+              <Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button></div>
           }
+              <ModeToggle></ModeToggle>
           
                   </div>
                 </div>

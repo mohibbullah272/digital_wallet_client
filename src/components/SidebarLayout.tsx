@@ -30,6 +30,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader className="items-center">
         <Link to="/">
     <Logo></Logo>
+ 
         </Link>
       </SidebarHeader>
       <SidebarContent>

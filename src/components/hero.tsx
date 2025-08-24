@@ -30,8 +30,8 @@ const Hero = ({
   return (
     <section className="overflow-hidden bg-gradient-to-br from-primary/10 via-primary/10 to-background min-h-screen flex justify-center  py-32">
       <div className="container ">
-        <div className="flex flex-col   gap-5">
-          <div className="relative flex flex-col   gap-5">
+        <div className="flex flex-col items-center justify-center  gap-5">
+          <div className="relative flex flex-col  items-center justify-center  gap-5">
             <div
               style={{
                 transform: "translate(-50%, -50%)",

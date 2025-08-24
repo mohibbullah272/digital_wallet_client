@@ -102,7 +102,7 @@ const UserOverview: React.FC<UserOverviewProps> = ({
   };
 
   return (
-    <div className="space-y-6 p-6 max-w-4xl mx-auto">
+    <div className="space-y-6 ">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
