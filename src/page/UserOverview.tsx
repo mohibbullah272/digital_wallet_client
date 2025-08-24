@@ -1,7 +1,9 @@
-import React from 'react';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight, ArrowDownLeft, Send, Wallet, Clock } from 'lucide-react';
+import { useWalletInfoQuery } from '@/redux/features/userApi/userApi';
+import { Link } from 'react-router';
 
 // TypeScript interfaces
 interface Transaction {
@@ -12,25 +14,10 @@ interface Transaction {
   description: string;
 }
 
-interface WalletBalance {
-  total: number;
-  currency: string;
-  change: number;
-  changePercent: number;
-}
 
-interface UserOverviewProps {
-  walletBalance?: WalletBalance;
-  recentTransactions?: Transaction[];
-}
 
-// Placeholder data
-const defaultWalletBalance: WalletBalance = {
-  total: 12847.32,
-  currency: 'USD',
-  change: 342.18,
-  changePercent: 2.74
-};
+
+
 
 const defaultTransactions: Transaction[] = [
   {
@@ -70,10 +57,13 @@ const defaultTransactions: Transaction[] = [
   }
 ];
 
-const UserOverview: React.FC<UserOverviewProps> = ({
-  walletBalance = defaultWalletBalance,
+const UserOverview = ({
+ 
   recentTransactions = defaultTransactions
 }) => {
+  const {data}=useWalletInfoQuery(undefined)
+  console.log(data)
+  let  walletBalance = data?.data
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
       case 'deposit':
@@ -123,12 +113,9 @@ const UserOverview: React.FC<UserOverviewProps> = ({
         <CardContent>
           <div className="space-y-2">
             <div className="text-3xl font-bold text-foreground">
-              ${walletBalance.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+           {walletBalance?.balance}
             </div>
-            <div className={`flex items-center text-sm ${walletBalance.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-              <ArrowUpRight className={`h-4 w-4 mr-1 ${walletBalance.change < 0 ? 'rotate-180' : ''}`} />
-              {formatAmount(walletBalance.change)} ({walletBalance.changePercent}%) this month
-            </div>
+     
           </div>
         </CardContent>
       </Card>
@@ -141,17 +128,23 @@ const UserOverview: React.FC<UserOverviewProps> = ({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button className="h-16 bg-primary hover:bg-primary/90 text-primary-foreground flex flex-col gap-2">
+          <Button className="h-16 bg-primary hover:bg-primary/90 text-primary-foreground flex flex-col gap-2">
               <ArrowDownLeft className="h-5 w-5" />
+          <Link to={'/user/deposit'}>
               Deposit
+          </Link>
             </Button>
-            <Button variant="secondary" className="h-16 bg-secondary hover:bg-secondary/90 text-secondary-foreground flex flex-col gap-2">
+  <Button variant="secondary" className="h-16 bg-secondary hover:bg-secondary/90 text-secondary-foreground flex flex-col gap-2">
               <ArrowUpRight className="h-5 w-5" />
+  <Link to={'/user/withdraw'}>
               Withdraw
+  </Link>
             </Button>
-            <Button variant="outline" className="h-16 border-border hover:bg-accent flex flex-col gap-2">
+      <Button variant="outline" className="h-16 border-border hover:bg-accent flex flex-col gap-2">
               <Send className="h-5 w-5" />
-              Send
+      <Link to={'/user/send-money'}>
+              Send Money
+      </Link>
             </Button>
           </div>
         </CardContent>

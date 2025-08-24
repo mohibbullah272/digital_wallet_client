@@ -3,7 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowDownLeft, DollarSign, FileText, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { ArrowDownLeft, DollarSign, FileText,    } from 'lucide-react';
+import { useUserDepositMoneyMutation } from '@/redux/features/userApi/userApi';
+import { toast } from 'sonner';
 
 // TypeScript interfaces
 interface DepositForm {
@@ -11,40 +13,20 @@ interface DepositForm {
   description: string;
 }
 
-interface TransactionPreview {
-  amount: number;
-  fee: number;
-  total: number;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  referenceId: string;
-  estimatedTime: string;
-}
+
 
 interface UserDepositProps {
   onDeposit?: (data: DepositForm) => void;
   isLoading?: boolean;
 }
 
-const UserDeposit: React.FC<UserDepositProps> = ({
-  onDeposit,
-  isLoading = false
-}) => {
+const UserDeposit: React.FC<UserDepositProps> = () => {
   const [form, setForm] = useState<DepositForm>({
     amount: '',
     description: ''
   });
 
-  const [showPreview, setShowPreview] = useState(false);
-
-  // Placeholder transaction preview data
-  const generatePreview = (amount: number): TransactionPreview => ({
-    amount: amount,
-    fee: Math.max(amount * 0.025, 2.50), // 2.5% fee with $2.50 minimum
-    total: amount + Math.max(amount * 0.025, 2.50),
-    status: 'pending',
-    referenceId: `DEP-${Date.now().toString().slice(-8)}`,
-    estimatedTime: '2-5 minutes'
-  });
+const [userDepositMoney]=useUserDepositMoneyMutation()
 
   const handleInputChange = (field: keyof DepositForm, value: string) => {
     setForm(prev => ({
@@ -53,44 +35,29 @@ const UserDeposit: React.FC<UserDepositProps> = ({
     }));
   };
 
-  const handleDeposit = () => {
-    const amount = parseFloat(form.amount);
-    if (amount && amount > 0) {
-      setShowPreview(true);
-      if (onDeposit) {
-        onDeposit(form);
+  const handleDeposit =async () => {
+    try {
+  
+      const depositInfo ={
+       amount:parseInt(form?.amount),
+       description:form?.description
       }
+      const res = await userDepositMoney(depositInfo)
+      toast.success(`deposit success trans_id ${res?.data?.data?.transaction?.referenceId}`)
+      setForm({
+        amount: '',
+        description: ''
+      })
+     
+    } catch (error:any) {
+      console.log(error)
+      toast.error('something went wrong try again later')
     }
   };
 
   const isValidAmount = form.amount && parseFloat(form.amount) > 0;
-  const preview = isValidAmount ? generatePreview(parseFloat(form.amount)) : null;
 
-  const getStatusIcon = (status: TransactionPreview['status']) => {
-    switch (status) {
-      case 'completed':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'processing':
-        return <Clock className="h-4 w-4 text-blue-500" />;
-      case 'failed':
-        return <AlertCircle className="h-4 w-4 text-red-500" />;
-      default:
-        return <Clock className="h-4 w-4 text-yellow-500" />;
-    }
-  };
 
-  const getStatusColor = (status: TransactionPreview['status']) => {
-    switch (status) {
-      case 'completed':
-        return 'text-green-500';
-      case 'processing':
-        return 'text-blue-500';
-      case 'failed':
-        return 'text-red-500';
-      default:
-        return 'text-yellow-500';
-    }
-  };
 
   const formatAmount = (amount: number) => {
     return `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -158,104 +125,21 @@ const UserDeposit: React.FC<UserDepositProps> = ({
           {/* Deposit Button */}
           <Button
             onClick={handleDeposit}
-            disabled={!isValidAmount || isLoading}
+            disabled={!isValidAmount}
             className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
           >
-            {isLoading ? (
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 animate-spin" />
-                Processing...
-              </div>
-            ) : (
+           
+           
               <div className="flex items-center gap-2">
                 <ArrowDownLeft className="h-4 w-4" />
                 Deposit {isValidAmount ? formatAmount(parseFloat(form.amount)) : 'Funds'}
               </div>
-            )}
+          
           </Button>
         </CardContent>
       </Card>
 
-      {/* Preview/Confirmation Section */}
-      {preview && showPreview && (
-        <Card className="bg-card border-border">
-          <CardHeader>
-            <CardTitle className="text-foreground">Transaction Preview</CardTitle>
-            <CardDescription>Review your deposit details before confirmation</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Transaction Details */}
-            <div className="space-y-3 p-4 bg-muted/50 rounded-lg border border-border">
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground">Deposit Amount</span>
-                <span className="font-medium text-foreground">{formatAmount(preview.amount)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground">Processing Fee</span>
-                <span className="font-medium text-foreground">{formatAmount(preview.fee)}</span>
-              </div>
-              
-              <div className="border-t border-border pt-3">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-foreground">Total Amount</span>
-                  <span className="font-bold text-lg text-foreground">{formatAmount(preview.total)}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Status and Reference */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-foreground">Status</Label>
-                <div className={`flex items-center gap-2 font-medium capitalize ${getStatusColor(preview.status)}`}>
-                  {getStatusIcon(preview.status)}
-                  {preview.status}
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label className="text-foreground">Reference ID</Label>
-                <div className="font-mono text-sm text-muted-foreground bg-background px-3 py-2 rounded border border-border">
-                  {preview.referenceId}
-                </div>
-              </div>
-            </div>
-
-            {/* Additional Info */}
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              Estimated processing time: {preview.estimatedTime}
-            </div>
-
-            {form.description && (
-              <div className="space-y-2">
-                <Label className="text-foreground">Description</Label>
-                <p className="text-muted-foreground bg-background px-3 py-2 rounded border border-border">
-                  {form.description}
-                </p>
-              </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="flex gap-3 pt-4">
-              <Button
-                variant="outline"
-                onClick={() => setShowPreview(false)}
-                className="flex-1 border-border hover:bg-accent"
-              >
-                Edit Details
-              </Button>
-              <Button
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Processing...' : 'Confirm Deposit'}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+   
     </div>
   );
 };

@@ -3,13 +3,7 @@ import { baseApi } from "../baseApi";
 
 export const userAPi = baseApi.injectEndpoints({
     endpoints:(builder)=>({
-        login: builder.mutation({
-            query: (userInfo) => ({
-              url: "/auth/login",
-              method: "POST",
-              data: userInfo,
-            }),
-          }),
+    
         updateProfile: builder.mutation({
             query: (userInfo) => ({
               url: "/users/profile",
@@ -18,19 +12,25 @@ export const userAPi = baseApi.injectEndpoints({
             }),
             invalidatesTags:["USER"]
           }),
+        userDepositMoney: builder.mutation({
+            query: (amount) => ({
+              url: "/wallets/deposit",
+              method: "POST",
+              data: amount,
+            }),
+            invalidatesTags:["BALANCE"]
+          }),
 
-
- 
-        userInfo: builder.query({
+        walletInfo: builder.query({
           query: () => ({
-            url: "/users/profile",
+            url: "/wallets/me",
             method: "GET",
           }),
-      providesTags:["USER"]
+      providesTags:["BALANCE"]
         }),
       
     
     })
 })
 
-export   const {useUpdateProfileMutation}= userAPi
+export   const {useUpdateProfileMutation,useWalletInfoQuery,useUserDepositMoneyMutation}= userAPi
