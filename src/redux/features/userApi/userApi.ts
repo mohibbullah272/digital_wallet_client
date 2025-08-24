@@ -18,7 +18,15 @@ export const userAPi = baseApi.injectEndpoints({
               method: "POST",
               data: amount,
             }),
-            invalidatesTags:["BALANCE"]
+            invalidatesTags:["BALANCE","HISTORY"]
+          }),
+        userWithdrawMoney: builder.mutation({
+            query: (amount) => ({
+              url: "/wallets/withdraw",
+              method: "POST",
+              data: amount,
+            }),
+            invalidatesTags:["BALANCE","HISTORY"]
           }),
 
         walletInfo: builder.query({
@@ -34,11 +42,11 @@ export const userAPi = baseApi.injectEndpoints({
             method: "GET",
             params
           }),
-     
+          providesTags:["HISTORY"]
         }),
       
     
     })
 })
 
-export   const {useUpdateProfileMutation,useWalletInfoQuery,useUserDepositMoneyMutation,useUserTransactionInfoQuery}= userAPi
+export   const {useUpdateProfileMutation,useWalletInfoQuery,useUserDepositMoneyMutation,useUserTransactionInfoQuery,useUserWithdrawMoneyMutation}= userAPi
