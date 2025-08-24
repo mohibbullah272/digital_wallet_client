@@ -38,7 +38,7 @@ const UserOverview = ({
     limit: 5,
   })
   let recentTransactions: Transaction[] = history?.data?.transactions
-
+console.log(recentTransactions)
   let  walletBalance = data?.data
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
@@ -46,7 +46,7 @@ const UserOverview = ({
         return <ArrowDownLeft className="h-4 w-4 text-green-500" />;
       case 'withdraw':
         return <ArrowUpRight className="h-4 w-4 text-red-500" />;
-      case 'send':
+      case 'transfer':
         return <Send className="h-4 w-4 text-blue-500" />;
       default:
         return <Clock className="h-4 w-4" />;

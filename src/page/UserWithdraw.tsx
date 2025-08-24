@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowUpRight, DollarSign, FileText, CheckCircle, Clock, AlertCircle, Wallet } from 'lucide-react';
+import { ArrowUpRight, DollarSign, FileText, Wallet } from 'lucide-react';
 import { useUserWithdrawMoneyMutation, useWalletInfoQuery } from '@/redux/features/userApi/userApi';
 import { toast } from 'sonner';
 

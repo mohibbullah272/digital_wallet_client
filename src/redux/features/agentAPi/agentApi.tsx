@@ -1,17 +1,10 @@
 import { baseApi } from "../baseApi";
 
 
-export const userAPi = baseApi.injectEndpoints({
+export const agentApi = baseApi.injectEndpoints({
     endpoints:(builder)=>({
     
-        updateProfile: builder.mutation({
-            query: (userInfo) => ({
-              url: "/users/profile",
-              method: "PUT",
-              data: userInfo,
-            }),
-            invalidatesTags:["USER"]
-          }),
+   
         userDepositMoney: builder.mutation({
             query: (amount) => ({
               url: "/wallets/deposit",
@@ -28,9 +21,17 @@ export const userAPi = baseApi.injectEndpoints({
             }),
             invalidatesTags:["BALANCE","HISTORY"]
           }),
-        userSendMoney: builder.mutation({
+      agentCashIn: builder.mutation({
             query: (amount) => ({
-              url: "/wallets/transfer",
+              url: "/agents/cash-in",
+              method: "POST",
+              data: amount,
+            }),
+            invalidatesTags:["BALANCE","HISTORY"]
+          }),
+      agentCashOut: builder.mutation({
+            query: (amount) => ({
+              url: "/agents/cash-out",
               method: "POST",
               data: amount,
             }),
@@ -43,6 +44,13 @@ export const userAPi = baseApi.injectEndpoints({
             method: "GET",
           }),
       providesTags:["BALANCE"]
+        }),
+        agentInfo: builder.query({
+          query: () => ({
+            url: "/agents/profile",
+            method: "GET",
+          }),
+    
         }),
         userTransactionInfo: builder.query({
           query: (params) => ({
@@ -58,4 +66,4 @@ export const userAPi = baseApi.injectEndpoints({
     })
 })
 
-export   const {useUpdateProfileMutation,useWalletInfoQuery,useUserDepositMoneyMutation,useUserTransactionInfoQuery,useUserWithdrawMoneyMutation,useUserSendMoneyMutation}= userAPi
+export   const {useAgentInfoQuery,useAgentCashInMutation,useAgentCashOutMutation}= agentApi
