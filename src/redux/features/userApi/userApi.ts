@@ -28,9 +28,17 @@ export const userAPi = baseApi.injectEndpoints({
           }),
       providesTags:["BALANCE"]
         }),
+        userTransactionInfo: builder.query({
+          query: (params) => ({
+            url: "/transactions/me",
+            method: "GET",
+            params
+          }),
+     
+        }),
       
     
     })
 })
 
-export   const {useUpdateProfileMutation,useWalletInfoQuery,useUserDepositMoneyMutation}= userAPi
+export   const {useUpdateProfileMutation,useWalletInfoQuery,useUserDepositMoneyMutation,useUserTransactionInfoQuery}= userAPi

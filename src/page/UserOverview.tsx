@@ -2,16 +2,22 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight, ArrowDownLeft, Send, Wallet, Clock } from 'lucide-react';
-import { useWalletInfoQuery } from '@/redux/features/userApi/userApi';
+import { useUserTransactionInfoQuery, useWalletInfoQuery } from '@/redux/features/userApi/userApi';
 import { Link } from 'react-router';
 
-// TypeScript interfaces
-interface Transaction {
-  id: string;
-  type: 'deposit' | 'withdraw' | 'send';
+export interface Transaction {
+  _id: string;
+  type: string;
   amount: number;
-  date: string;
+  fee: number;
+  commission: number;
+  initiatedBy: string;
+  status: string;
+  referenceId: string;
   description: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 
@@ -19,50 +25,20 @@ interface Transaction {
 
 
 
-const defaultTransactions: Transaction[] = [
-  {
-    id: '1',
-    type: 'deposit',
-    amount: 500.00,
-    date: '2024-01-15',
-    description: 'Bank Transfer'
-  },
-  {
-    id: '2',
-    type: 'send',
-    amount: -125.50,
-    date: '2024-01-14',
-    description: 'Payment to Alice'
-  },
-  {
-    id: '3',
-    type: 'withdraw',
-    amount: -200.00,
-    date: '2024-01-13',
-    description: 'ATM Withdrawal'
-  },
-  {
-    id: '4',
-    type: 'deposit',
-    amount: 1200.00,
-    date: '2024-01-12',
-    description: 'Salary Deposit'
-  },
-  {
-    id: '5',
-    type: 'send',
-    amount: -75.25,
-    date: '2024-01-11',
-    description: 'Coffee Shop Payment'
-  }
-];
+
+
 
 const UserOverview = ({
  
-  recentTransactions = defaultTransactions
+
 }) => {
   const {data}=useWalletInfoQuery(undefined)
-  console.log(data)
+  const {data:history}=useUserTransactionInfoQuery({
+    page: 1,
+    limit: 5,
+  })
+  let recentTransactions: Transaction[] = history?.data?.transactions
+
   let  walletBalance = data?.data
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
@@ -158,9 +134,9 @@ const UserOverview = ({
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {recentTransactions.map((transaction) => (
+            {recentTransactions &&  recentTransactions.map((transaction) => (
               <div
-                key={transaction.id}
+                key={transaction._id}
                 className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-accent/50 transition-colors"
               >
                 <div className="flex items-center gap-4">
@@ -181,16 +157,18 @@ const UserOverview = ({
                     {formatAmount(transaction.amount)}
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    {formatDate(transaction.date)}
+                    {formatDate(transaction.createdAt)}
                   </div>
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-6 text-center">
-            <Button variant="ghost" className="text-primary hover:text-primary/80">
+       <Link to={'/user/transaction'}>
+       <Button variant="ghost" className="text-primary hover:text-primary/80">
               View All Transactions
             </Button>
+       </Link>
           </div>
         </CardContent>
       </Card>
