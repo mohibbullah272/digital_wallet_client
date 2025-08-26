@@ -1,5 +1,9 @@
+import AdminAgentMange from "@/page/AdminAgentMange";
 import AdminOverview from "@/page/AdminOverview";
+import AdminTransactionHistory from "@/page/AdminTransactionHistroy";
 import AdminUserManage from "@/page/AdminUserManage";
+import AdminWalletMange from "@/page/AdminWalletMange";
+import ProfileMange from "@/page/ProfileMange";
 import type { ISidebarItem } from "@/types";
 
 
@@ -16,13 +20,33 @@ export const adminSidebarItems: ISidebarItem[] = [
     ],
   },
   {
-    title: "Wallet Management",
+    title: "User Management",
     items: [
       {
-        title: "Add Tour Type",
+        title: "Manage User",
         url: "/admin/manage-user",
         component: AdminUserManage
       },
+      {
+        title:"Manage Agents",
+        url:"/admin/manage-agents",
+        component:AdminAgentMange
+      },
+      {
+        title:"Mange Wallets",
+        url:"/admin/manage-wallet",
+        component:AdminWalletMange
+      },
+      {
+        title:"Mange Transaction",
+        url:"/admin/transaction",
+        component:AdminTransactionHistory
+      },
+      {
+        title:"Manage Profile",
+        url:"/admin/manage-profile",
+        component:ProfileMange
+      }
 
     ],
   },
