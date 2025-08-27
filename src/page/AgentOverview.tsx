@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight, ArrowDownLeft, Wallet, Clock, Shield, Calendar } from 'lucide-react';
-import { useUserTransactionInfoQuery, useWalletInfoQuery } from '@/redux/features/userApi/userApi';
+import { useUserTransactionInfoQuery } from '@/redux/features/userApi/userApi';
 import { Link } from 'react-router';
 import { useAgentCommissionQuery, useAgentInfoQuery } from '@/redux/features/agentAPi/agentApi';
 

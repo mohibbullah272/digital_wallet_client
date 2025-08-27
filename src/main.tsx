@@ -9,11 +9,14 @@ import { Toaster } from 'sonner'
 import { ThemeProvider } from './provider/Theme-provider'
 
 
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
 <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
 <RouterProvider router={router}>
+
 </RouterProvider>
 </ThemeProvider>
 <Toaster></Toaster>

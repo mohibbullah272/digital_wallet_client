@@ -3,15 +3,6 @@ import { baseApi } from "../baseApi";
 
 export const adminApi = baseApi.injectEndpoints({
     endpoints:(builder)=>({
-      agentCashIn: builder.mutation({
-            query: (amount) => ({
-              url: "/agents/cash-in",
-              method: "POST",
-              data: amount,
-            }),
-            invalidatesTags:["BALANCE","HISTORY","Commission"]
-          }),
-  
       approveAgent: builder.mutation({
         query: ({ agentId }) => ({
             url: `/admin/agents/approve/${agentId}`,
@@ -44,6 +35,14 @@ export const adminApi = baseApi.injectEndpoints({
           }),
     
         }),
+      getAllTransaction: builder.query({
+          query: (params) => ({
+            url: "/admin/transaction",
+            method: "GET",
+            params
+          }),
+    
+        }),
       allUsers: builder.query({
           query: () => ({
             url: "/admin/users",
@@ -65,19 +64,7 @@ export const adminApi = baseApi.injectEndpoints({
           }),
     
         }),
-        
-        userTransactionInfo: builder.query({
-          query: (params) => ({
-            url: "/transactions/me",
-            method: "GET",
-            params
-          }),
-          providesTags:["HISTORY"]
-        }),
-   
-      
-    
     })
 })
 
-export   const {useDashboardInfoQuery,useShowAgentInfoQuery,useApproveAgentMutation,useSuspendAgentMutation,useBlockWalletsMutation,useUnblockWalletsMutation,useAllWalletsQuery,useAllUsersQuery}= adminApi
+export   const {useDashboardInfoQuery,useShowAgentInfoQuery,useApproveAgentMutation,useSuspendAgentMutation,useBlockWalletsMutation,useUnblockWalletsMutation,useAllWalletsQuery,useAllUsersQuery,useGetAllTransactionQuery}= adminApi

@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/SidebarLayout";
+import TourGuide from "@/components/TourGuide";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Outlet } from "react-router";
@@ -18,6 +19,7 @@ export default function DashboardLayout() {
           />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
+          <TourGuide></TourGuide>
           <Outlet />
         </div>
       </SidebarInset>

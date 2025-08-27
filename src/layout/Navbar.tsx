@@ -96,7 +96,7 @@ dispatch(authApi.util.resetApiState())
     <section className="py-4 fixed top-0 left-0 w-full z-50 bg-background shadow-md  px-5 flex flex-col justify-between items-center ">
       <div className="container">
         {/* Desktop Menu */}
-        <nav className=" hidden justify-between lg:flex">
+        <nav id="nav-menu" className=" hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
             <a href='/' className="flex items-center gap-2">
@@ -127,7 +127,7 @@ dispatch(authApi.util.resetApiState())
               <Link className="hover:underline" to={`/${data?.data?.role}`}>Dashboard</Link>
               <Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button></div>
           }
-              <ModeToggle></ModeToggle>
+          <div id="theme-toggle"><ModeToggle></ModeToggle></div>
           </div>
         </nav>
 
@@ -175,7 +175,7 @@ dispatch(authApi.util.resetApiState())
               <Link className="hover:underline" to={`/${data?.data?.role}`}>Dashboard</Link>
               <Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button></div>
           }
-              <ModeToggle></ModeToggle>
+        <div id="theme-toggle"><ModeToggle></ModeToggle></div>
           
                   </div>
                 </div>

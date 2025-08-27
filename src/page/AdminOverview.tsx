@@ -2,12 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDashboardInfoQuery } from "@/redux/features/adminAPi/adminApi";
 import { useEffect } from "react";
 
-interface DashboardStats {
-  totalUsers: number;
-  totalAgents: number;
-  totalTransactions: number;
-  transactionVolume: number;
-}
+
 
 interface StatCard {
   title: string;
