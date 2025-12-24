@@ -2,97 +2,60 @@ import { HeroParallax } from "./ui/hero-parallax";
 
 export const products = [
     {
-      title: "Moonbeam",
-      link: "https://gomoonbeam.com",
+      title: "E-Wallet Future",
+   
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/moonbeam.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574886/E-Wallet-12-24-2025_04_08_PM_vovzcd.png",
     },
     {
-      title: "Cursor",
-      link: "https://cursor.so",
+      title: "E-Wallet Help",
+   
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/cursor.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574886/E-Wallet-12-24-2025_04_09_PM_mdpnzo.png",
     },
     {
-      title: "Rogue",
-      link: "https://userogue.com",
+      title: "E-Wallet Send Money",
+    
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/rogue.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_04_11_PM_hpk1yi.png",
     },
    
     {
-      title: "Editorially",
-      link: "https://editorially.org",
+      title: "Transaction",
+
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/editorially.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_04_10_PM_pmlldq.png",
     },
     {
-      title: "Editrix AI",
-      link: "https://editrix.ai",
+      title: "Deposit",
+
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/editrix.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_04_12_PM_fyrray.png",
     },
     {
-      title: "Pixel Perfect",
-      link: "https://app.pixelperfect.quest",
+      title: "Dashboard",
+
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/pixelperfect.png",
-    },
-   
-    {
-      title: "Algochurn",
-      link: "https://algochurn.com",
-      thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/algochurn.png",
-    },
-    {
-      title: "Aceternity UI",
-      link: "https://ui.aceternity.com",
-      thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/aceternityui.png",
-    },
-    {
-      title: "Tailwind Master Kit",
-      link: "https://tailwindmasterkit.com",
-      thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png",
-    },
-    {
-      title: "SmartBridge",
-      link: "https://smartbridgetech.com",
-      thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/smartbridge.png",
-    },
-    {
-      title: "Renderwork Studio",
-      link: "https://renderwork.studio",
-      thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/renderwork.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_05_10_PM_hr5iwe.png",
     },
    
     {
-      title: "Creme Digital",
-      link: "https://cremedigital.com",
+      title: "Profile Setting",
+    
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/cremedigital.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_04_13_PM_1_ag9hji.png",
     },
     {
-      title: "Golden Bells Academy",
-      link: "https://goldenbellsacademy.com",
+      title: "Withdraw",
+
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/goldenbellsacademy.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_04_13_PM_kawaov.png",
     },
     {
-      title: "Invoker Labs",
-      link: "https://invoker.lol",
+      title: "User Dashboard",
+  
       thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/invoker.png",
-    },
-    {
-      title: "E Free Invoice",
-      link: "https://efreeinvoice.com",
-      thumbnail:
-        "https://aceternity.com/images/products/thumbnails/new/efreeinvoice.png",
+        "https://res.cloudinary.com/dovnztfxq/image/upload/v1766574885/E-Wallet-12-24-2025_04_14_PM_resboo.png",
     },
   ];
 const ParallaxHero = () => {

@@ -15,7 +15,6 @@ export const HeroParallax = ({
 }: {
   products: {
     title: string;
-    link: string;
     thumbnail: string;
   }[];
 }) => {
@@ -120,7 +119,6 @@ export const ProductCard = ({
 }: {
   product: {
     title: string;
-    link: string;
     thumbnail: string;
   };
   translate: MotionValue<number>;
@@ -137,7 +135,7 @@ export const ProductCard = ({
       className="group/product h-96 w-[30rem] relative shrink-0"
     >
       <a
-        href={product.link}
+        href="/"
         className="block group-hover/product:shadow-2xl "
       >
         <img
