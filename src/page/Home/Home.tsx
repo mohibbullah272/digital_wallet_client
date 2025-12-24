@@ -1,4 +1,5 @@
-import { Hero } from "@/components/hero";
+
+import ParallaxHero from "@/components/ParallaxHero";
 
 
 
@@ -6,7 +7,7 @@ import { Hero } from "@/components/hero";
 const Home = () => {
     return (
         <div >
-   <Hero></Hero>
+<ParallaxHero></ParallaxHero>
         </div>
     );
 };
