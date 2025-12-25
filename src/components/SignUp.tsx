@@ -46,14 +46,17 @@ try {
 
 
   return (
-    <section className="bg-muted h-screen">
+    <section style={{
+      backgroundImage:`url(https://i.pinimg.com/736x/8a/29/e7/8a29e7f4bad8c9b41d21390f0f7925bb.jpg)`,
+      
+    }} className="min-h-screen bg-cover bg-center">
       <div className="flex h-full items-center justify-center">
-        <div className="flex flex-col items-center gap-6 lg:justify-start">
+        <div className="flex flex-col my-10 items-center gap-6 lg:justify-start">
           {/* Logo */}
           <p className="flex items-center gap-2" >
         <Logo></Logo><span className="text-xl font-medium">E-Wallet.com</span>
           </p>
-          <div className="min-w-sm border-muted bg-background flex w-full max-w-sm flex-col items-center gap-y-4 rounded-md border px-6 py-8 shadow-md">
+          <div className="min-w-sm bg-white/5 backdrop-blur-lg flex w-full max-w-sm flex-col items-center gap-y-4 rounded-md  px-6 py-8 shadow-md">
          <h1 className="text-xl font-semibold">Create Account</h1>
          <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
@@ -132,12 +135,12 @@ try {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">sign up</Button>
+        <Button className="w-full bg-muted/50 text-white" type="submit">sign up</Button>
       </form>
     </Form>
             
           </div>
-          <div className="text-muted-foreground flex justify-center gap-1 text-sm">
+          <div className="text-gray-300 flex justify-center gap-1 text-sm">
             <p>Already have a account ? </p>
             <Link
             
