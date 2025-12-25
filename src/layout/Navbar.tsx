@@ -50,10 +50,7 @@ interface Navbar1Props {
       title: string;
       url: string;
     };
-    signup: {
-      title: string;
-      url: string;
-    };
+
   };
 }
 
@@ -80,7 +77,6 @@ const Navbar = ({
   ],
   auth = {
     login: { title: "Login", url: "/login" },
-    signup: { title: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
 
@@ -116,18 +112,18 @@ dispatch(authApi.util.resetApiState())
           <div className="flex gap-2">
         
           {
-            !data?.data?<>
+            !data?.data?<div className="flex gap-2">
+                 <div id="theme-toggle"><ModeToggle></ModeToggle></div>
             <Button asChild variant="outline">
             <Link to={auth.login.url}>{auth.login.title}</Link>
           </Button>
-          <Button asChild>
-            <Link to={auth.signup.url}>{auth.signup.title}</Link>
-          </Button>
-            </>   :<div className="flex items-center gap-3">
+       
+            </div>   :<div className="flex items-center gap-3">
               <Link className="hover:underline" to={`/${data?.data?.role}`}>Dashboard</Link>
+              <div id="theme-toggle"><ModeToggle></ModeToggle></div>
               <Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button></div>
           }
-          <div id="theme-toggle"><ModeToggle></ModeToggle></div>
+     
           </div>
         </nav>
 
@@ -168,9 +164,7 @@ dispatch(authApi.util.resetApiState())
             <Button asChild variant="outline">
             <Link to={auth.login.url}>{auth.login.title}</Link>
           </Button>
-          <Button asChild>
-            <Link to={auth.signup.url}>{auth.signup.title}</Link>
-          </Button>
+    
             </>   :<div className="flex flex-col gap-3">
               <Link className="hover:underline" to={`/${data?.data?.role}`}>Dashboard</Link>
               <Button className="flex items-center gap-2" onClick={handleLogout}  variant='outline'>Logout <LogOut></LogOut></Button></div>
